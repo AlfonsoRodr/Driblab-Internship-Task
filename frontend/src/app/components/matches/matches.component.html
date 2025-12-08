@@ -1,0 +1,61 @@
+<div class="space-y-8">
+    <section class="border border-gray-200 rounded-lg shadow-sm">
+        <!-- League header -->
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-gray-200 bg-gray-50">
+            @if (currentLeague.logo) {
+                <img [src]="currentLeague.logo" [alt]="currentLeague.leagueName + ' logo'" class="h-8 w-8" />
+            }
+            <h2 class="text-lg font-semibold text-gray-800">{{ currentLeague.leagueName }} Matches</h2>
+        </div>
+
+        <!-- Matches list -->
+        @if (matches.length > 0) {
+            <ul class="divide-y divide-gray-200">
+                @for (match of matches; track match.homeTeam.name) {
+                    <li class="px-4 py-4 hover:bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <!-- Teams -->
+                            <div class="flex items-center gap-4">
+                                <div class="flex items-center gap-2">
+                                    <img [src]="match.homeTeam.logo" [alt]="match.homeTeam.name + ' logo'" class="h-6 w-6" />
+                                    <span class="font-medium text-gray-800">{{ match.homeTeam.name }}</span>
+                                    <span class="text-xs text-gray-500">({{ match.homeTeam.tla }})</span>
+                                </div>
+                                <span class="text-sm font-semibold text-gray-700">vs</span>
+                                <div class="flex items-center gap-2">
+                                    <img [src]="match.awayTeam.logo" [alt]="match.awayTeam.name + ' logo'" class="h-6 w-6" />
+                                    <span class="font-medium text-gray-800">{{ match.awayTeam.name }}</span>
+                                    <span class="text-xs text-gray-500">({{ match.awayTeam.tla }})</span>
+                                </div>
+                            </div>
+
+                            <!-- Score -->
+                            <div class="flex flex-col items-end">
+                                <span class="text-lg font-bold text-gray-900">
+                                    {{ match.fullTime.home }} - {{ match.fullTime.away }}
+                                </span>
+                                <span class="text-xs text-gray-500">
+                                    HT: {{ match.halfTime.home }} - {{ match.halfTime.away }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Extra info -->
+                        <div class="mt-2 flex items-center justify-between text-xs text-gray-500">
+                            <span>Duration: {{ match.duration }}</span>
+                            <span>Referee: {{ match.refereeName }}</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        @else {
+            <p class="px-4 py-3 text-sm text-gray-500">No matches available for this league.</p>
+        }
+
+        <!-- Error message -->
+        @if (errorMessage) {
+            <p class="px-4 py-3 text-sm text-red-600">{{ errorMessage }}</p>
+        }
+    </section>
+</div>

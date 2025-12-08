@@ -1,0 +1,84 @@
+<div class="space-y-8">
+	<section class="border border-gray-200 rounded-lg shadow-sm">
+		<!-- League header -->
+		<div class="flex items-center gap-3 px-4 py-3 border-b border-gray-200 bg-gray-50">
+			@if (currentLeague.logo) {
+				<img [src]="currentLeague.logo" [alt]="currentLeague.leagueName + ' logo'" class="h-8 w-8" />
+			}
+			<h2 class="text-lg font-semibold text-gray-800">{{ currentLeague.leagueName }}</h2>
+		</div>
+
+		<!-- Standings table -->
+		@if (standings.length > 0) {
+			<div class="overflow-x-auto">
+				<table class="min-w-full divide-y divide-gray-200">
+					<thead class="bg-gray-100">
+						<tr>
+							<th class="px-3 py-2 text-left text-xs font-semibold text-gray-700">Pos</th>
+							<th class="px-3 py-2 text-left text-xs font-semibold text-gray-700">
+								Team
+							</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">P</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">W</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">D</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">L</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">
+								Pts
+							</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">GF</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">GA</th>
+							<th class="px-3 py-2 text-right text-xs font-semibold text-gray-700">GD</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-gray-200">
+						@for (row of standings; track row.team.name) {
+							<tr class="hover:bg-gray-50">
+								<td class="px-3 py-2 text-sm text-gray-800">{{ row.position }}</td>
+								<td class="px-3 py-2 text-sm text-gray-800">
+									<div class="flex items-center gap-2">
+										<img
+											[src]="row.team.logo"
+											[alt]="row.team.name + ' crest'"
+											class="h-6 w-6"
+										/>
+										<span>{{ row.team.name }}</span>
+									</div>
+								</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">
+									{{ row.playedGames }}
+								</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">{{ row.won }}</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">{{ row.draw }}</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">{{ row.lost }}</td>
+								<td class="px-3 py-2 text-sm font-semibold text-gray-900 text-right">
+									{{ row.points }}
+								</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">
+									{{ row.goalsFor }}
+								</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">
+									{{ row.goalsAgainst }}
+								</td>
+								<td class="px-3 py-2 text-sm text-gray-800 text-right">
+									{{ row.goalDifference }}
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+		@else {
+			<p class="px-4 py-3 text-sm text-gray-500">No standings available for this league.</p>
+		}
+
+		<div class="px-4 py-3">
+            <button
+                class="w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                (click)="seeMatches()"
+            >
+                See matches
+            </button>
+        </div>
+	</section>
+</div>
