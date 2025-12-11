@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 	standalone: true,
 	imports: [CommonModule],
 	changeDetection: ChangeDetectionStrategy.Default,
-	templateUrl: './league.component.html'
+	templateUrl: './league.component.html',
 })
 export class LeagueComponent implements OnInit {
 	public allLeagues: League[] = [];
@@ -19,8 +19,9 @@ export class LeagueComponent implements OnInit {
 
 	ngOnInit() {
 		this.service.getAvailableLeagues().subscribe({
-			next: (response) => this.allLeagues = response,
-			error: (_) => this.errorMessage = 'An error occur trying to fetch the data from the api'
+			next: (response) => (this.allLeagues = response),
+			error: (_) =>
+				(this.errorMessage = 'An error occur trying to fetch the data from the api'),
 		});
 	}
 

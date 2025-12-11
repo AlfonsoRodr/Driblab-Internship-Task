@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { League } from '../models/league.model';
-import { filterAndMapCompetitions, formatDate, mapStandings } from '../utilities/mapper';
+import { filterAndMapCompetitions, formatDate, mapMatches, mapStandings } from '../utilities/mapper';
 import { Standings } from '../models/standings.model';
 import { Match } from '../models/match.model';
 
@@ -13,6 +13,7 @@ import { Match } from '../models/match.model';
 export class MainService {
 	private selectedLeagueSubject = new BehaviorSubject<League>({
 		country: '',
+		flag: '',
 		leagueName: '',
 		logo: '',
 		leagueCode: ''
@@ -38,8 +39,10 @@ export class MainService {
 	}
 
 	public getMatches(leagueCode: string, dateFrom: Date, dateTo: Date): Observable<Match[]> {
+		const headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
 		const from = formatDate(dateFrom);
 		const to = formatDate(dateTo);
-		return this.http.get<Match[]>(`/api/v4/matches?competitions=${leagueCode}&dateFrom=${from}&dateTo=${to}`);
+		return this.http.get<Match[]>(`/api/v4/matches?competitions=${leagueCode}&dateFrom=2025-11-01&dateTo=2025-11-10`, { headers })
+			.pipe(map(response => mapMatches(response)));
 	}
 }

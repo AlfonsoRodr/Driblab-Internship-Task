@@ -7,6 +7,7 @@ export function filterAndMapCompetitions(response: any): League[] {
 		.filter((comp: any) => comp.type === 'LEAGUE')
 		.map((comp: any): League => ({
 			country: comp.area.code,
+			flag: comp.area.flag,
 			leagueName: comp.name,
 			leagueCode: comp.code,
 			logo:comp.emblem

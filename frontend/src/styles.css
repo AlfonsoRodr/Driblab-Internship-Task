@@ -1,1 +1,32 @@
 @import "tailwindcss";
+@plugin "@midudev/tailwind-animations";
+
+/* Loading Modal */
+
+@keyframes fadeInUpSmooth {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeInUpSmooth {
+    animation: fadeInUpSmooth 0.6s ease-out forwards;
+}
+
+@keyframes spinInfinite {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spin-infinite {
+  animation: spinInfinite 1s linear infinite;
+}
+
+.app-button {
+	@apply rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 hover:brightness-125 hover:shadow-lg transition-all duration-300 ease-out hover:scale-[1.02] cursor-pointer
+}
