@@ -20,8 +20,7 @@ export class LeagueComponent implements OnInit {
 	ngOnInit() {
 		this.service.getAvailableLeagues().subscribe({
 			next: (response) => (this.allLeagues = response),
-			error: (_) =>
-				(this.errorMessage = 'An error occur trying to fetch the data from the api'),
+			error: (_) => this.errorMessage = 'An error occur trying to fetch the data from the api'
 		});
 	}
 

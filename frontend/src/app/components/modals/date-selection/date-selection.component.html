@@ -1,0 +1,114 @@
+<div
+	class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-gray-900/50 backdrop-blur-md"
+	[ngClass]="isClosing ? 'animate-fade-out-down' : 'animate-fade-in-up'"
+>
+	<div
+		class="bg-linear-to-br from-white to-gray-50 rounded-3xl shadow-2xl w-full max-w-lg transform transition-all duration-300 animate-scaleIn"
+	>
+		<div class="flex items-center justify-between p-6 border-b border-gray-200">
+			<h3 class="text-2xl font-extrabold text-indigo-700 tracking-tight">
+				🎯 Select a date range
+			</h3>
+			<button
+				(click)="closeModal()"
+				class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-indigo-600 transition-colors cursor-pointer"
+				aria-label="Close"
+			>
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2.5"
+						d="M6 18L18 6M6 6l12 12"
+					></path>
+				</svg>
+			</button>
+		</div>
+
+		<!-- Body -->
+		<div class="p-6 space-y-8">
+			<button (click)="setSelectedDateToday()" class="w-full py-3 px-5 app-button">
+				📅 Show Matches since <span class="font-bold">Today</span>
+			</button>
+
+			<!-- Divider -->
+			<div class="relative flex items-center justify-center">
+				<div class="absolute inset-x-0 border-t border-gray-300"></div>
+				<span class="bg-white px-4 text-sm text-gray-500 font-medium relative z-10">
+					Or choose a date range
+				</span>
+			</div>
+
+			<!-- Date inputs -->
+			<div class="grid grid-cols-2 gap-6">
+				<!-- Date From -->
+				<div
+					class="flex flex-col space-y-2 p-4 bg-gray-50 rounded-2xl border border-gray-200 hover:shadow-sm transition"
+				>
+					<label
+						for="dateFrom"
+						class="text-xs font-semibold text-gray-700 flex items-center gap-2"
+					>
+						<svg
+							class="h-4 w-4 text-indigo-500"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+							></path>
+						</svg>
+						Date From
+					</label>
+					<input
+						type="date"
+						id="dateFrom"
+						name="dateFrom"
+						[(ngModel)]="selectedDateFrom"
+						(change)="calculateDateTo()"
+						class="p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 bg-white text-base font-medium"
+					/>
+				</div>
+
+				<!-- Date To -->
+				<div
+					class="flex flex-col space-y-2 p-4 bg-gray-50 rounded-2xl border border-gray-200 hover:shadow-sm transition"
+				>
+					<label class="text-xs font-semibold text-gray-700 flex items-center gap-2">
+						<svg
+							class="h-4 w-4 text-indigo-500"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+							></path>
+						</svg>
+						Date To (10 days)
+					</label>
+					<div
+						class="p-2 bg-white border border-gray-300 rounded-lg text-gray-800 h-10 flex items-center font-medium text-base"
+					>
+						@if (dateTo) {
+							{{ dateTo | date : 'dd/MM/yyyy' }}
+						}
+						@else { -- / -- / ---- }
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Apply Changes Button -->
+		<div class="mt-6 p-6 border-t border-gray-200 flex justify-end">
+			<button (click)="applyDates()" class="py-2.5 px-8 app-button">Apply Dates</button>
+		</div>
+	</div>
+</div>

@@ -6,6 +6,7 @@ export type Score = {
 }
 
 export type Match = {
+	date: Date,
 	homeTeam: Team,
 	awayTeam: Team,
 	duration: string,

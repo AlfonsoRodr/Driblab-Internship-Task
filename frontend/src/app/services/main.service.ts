@@ -6,6 +6,7 @@ import { League } from '../models/league.model';
 import { filterAndMapCompetitions, formatDate, mapMatches, mapStandings } from '../utilities/mapper';
 import { Standings } from '../models/standings.model';
 import { Match } from '../models/match.model';
+import { DateSelector } from '../models/date.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -20,11 +21,18 @@ export class MainService {
 	});
 	public selectedLeague$: Observable<League> = this.selectedLeagueSubject.asObservable();
 
+	private dateRangeSubject = new BehaviorSubject<DateSelector>({
+        dateFrom: new Date(),
+        dateTo: new Date(new Date().setDate(new Date().getDate() + 10))
+    });
+    public dateRange$ = this.dateRangeSubject.asObservable();
+	public apiUrl = '/api/v4/competitions';
+	private headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
+
 	constructor(private http: HttpClient) {}
 
 	public getAvailableLeagues(): Observable<League[]> {
-		const headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
-		return this.http.get<League[]>(`/api/v4/competitions`, { headers })
+		return this.http.get<League[]>(`${this.apiUrl}`, { headers: this.headers })
 			.pipe(map(response => filterAndMapCompetitions(response)));
 	}
 
@@ -32,17 +40,19 @@ export class MainService {
 		this.selectedLeagueSubject.next(league);
 	}
 
+	public setDateRange(dates: DateSelector): void {
+        this.dateRangeSubject.next(dates);
+    }
+
 	public getStandings(leagueCode: string): Observable<Standings[]> {
-		const headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
-		return this.http.get<Standings[]>(`/api/v4/competitions/${leagueCode}/standings`, { headers })
+		return this.http.get<Standings[]>(`${this.apiUrl}/${leagueCode}/standings`, { headers: this.headers })
 			.pipe(map(response => mapStandings(response)));
 	}
 
 	public getMatches(leagueCode: string, dateFrom: Date, dateTo: Date): Observable<Match[]> {
-		const headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
 		const from = formatDate(dateFrom);
 		const to = formatDate(dateTo);
-		return this.http.get<Match[]>(`/api/v4/matches?competitions=${leagueCode}&dateFrom=2025-11-01&dateTo=2025-11-10`, { headers })
+		return this.http.get<Match[]>(`/api/v4/matches?competitions=${leagueCode}&dateFrom=${from}&dateTo=${to}`, { headers: this.headers })
 			.pipe(map(response => mapMatches(response)));
 	}
 }

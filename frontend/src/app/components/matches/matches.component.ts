@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from '../../services/main.service';
 import { League } from '../../models/league.model';
 import { Match } from '../../models/match.model';
-import { LoadingModalComponent } from "../loading-modal/loading-modal.component";
+import { LoadingModalComponent } from "../modals/loading-modal/loading-modal.component";
+import { DatePipe } from '@angular/common';
+import { GoBackButtonComponent } from "../go-back-button/go-back-button.component";
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-matches',
 	standalone: true,
 	templateUrl: './matches.component.html',
- 	imports: [LoadingModalComponent],
+ 	imports: [LoadingModalComponent, DatePipe, GoBackButtonComponent],
 })
 export class MatchesComponent implements OnInit {
 	public currentLeague!: League;
@@ -22,16 +25,21 @@ export class MatchesComponent implements OnInit {
 	public displayedMatches: Match[] = [];
 
 	public dateFrom: Date = new Date();
-	public dateTo: Date = new Date(new Date().setDate(new Date().getDate() + 1));
+	public dateTo: Date = new Date();
 
-	constructor(private service: MainService) {}
+	constructor(private service: MainService, private router: Router) {}
 
 	ngOnInit() {
+		this.errorMessage = '';
+
+		this.service.dateRange$.subscribe((dates) => {
+			this.dateFrom = dates.dateFrom;
+			this.dateTo = dates.dateTo;
+		});
+
 		this.service.selectedLeague$.subscribe((response) => {
 			this.currentLeague = response;
-			if (this.currentLeague.leagueCode) {
-				this.loadMatches();
-			}
+			this.loadMatches();
 		});
 	}
 
@@ -69,4 +77,8 @@ export class MatchesComponent implements OnInit {
         this.displayedMatches = [];
         this.currentIndex = 0;
     }
+
+	public goBack() {
+		this.router.navigate(['standings']);
+	}
 }
