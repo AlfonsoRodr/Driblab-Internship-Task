@@ -3,6 +3,7 @@
 ## Table of Contents
 - [Author and Github Repository](#-author-and-github-repository)
 - [Instructions](#-instructions)
+- [Deployment](#-deployment)
 - [Application Structure](#-application-structure)
 - [Quality Control](#-quality-control)
 - [Other Tools](#-other-tools)
@@ -66,6 +67,9 @@ ng serve --proxy-config proxy.conf.json
 
 If everything goes as expected, you will be able to access it at: **http://localhost:4200**
 
+## 🚀 Deployment
+The application was deployed using `Vercel`, and it's now accessible through this [url](https://deployment-attempt-10-gt9ksitub-alfonsorodrs-projects.vercel.app/)
+
 ## 🧱 Application Structure
 INSERTAR FOTO DEL DIAGRAMA
 
@@ -94,3 +98,4 @@ npm run test:coverage
 For the development of this project, various complementary tools were used to support the development process. These are as follows:
 - [TailwindCSS](https://tailwindcss.com/)
 - [Tailwind Animations](https://tailwindcss-animations.vercel.app/)
+- [Vercel](https://vercel.com/)
