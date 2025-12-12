@@ -32,8 +32,14 @@ export class MainService {
 
 	constructor(private http: HttpClient) {}
 
+	private getUrlWithCacheBreaker(url: string): string {
+		const separator = url.includes('?') ? '&' : '?';
+		return `${url}${separator}t=${new Date().getTime()}`;
+	}
+
 	public getAvailableLeagues(): Observable<League[]> {
-		return this.http.get<League[]>(`${this.apiUrl}/competitions`, { headers: this.headers })
+		const url = `${this.apiUrl}/competitions`;
+		return this.http.get<League[]>(this.getUrlWithCacheBreaker(url), { headers: this.headers })
 			.pipe(map(response => filterAndMapCompetitions(response)));
 	}
 
@@ -46,14 +52,16 @@ export class MainService {
     }
 
 	public getStandings(leagueCode: string): Observable<Standings[]> {
-		return this.http.get<Standings[]>(`${this.apiUrl}/competitions/${leagueCode}/standings`, { headers: this.headers })
+		const url = `${this.apiUrl}/competitions/${leagueCode}/standings`;
+		return this.http.get<Standings[]>(this.getUrlWithCacheBreaker(url), { headers: this.headers })
 			.pipe(map(response => mapStandings(response)));
 	}
 
 	public getMatches(leagueCode: string, dateFrom: Date, dateTo: Date): Observable<Match[]> {
 		const from = formatDate(dateFrom);
 		const to = formatDate(dateTo);
-		return this.http.get<Match[]>(`${environment.apiUrl}/matches?competitions=${leagueCode}&dateFrom=${from}&dateTo=${to}`, { headers: this.headers })
+		const url = `${environment.apiUrl}/matches?competitions=${leagueCode}&dateFrom=${from}&dateTo=${to}`;
+		return this.http.get<Match[]>(this.getUrlWithCacheBreaker(url), { headers: this.headers })
 			.pipe(map(response => mapMatches(response)));
 	}
 }
