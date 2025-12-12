@@ -27,7 +27,7 @@ export class MainService {
     });
     public dateRange$ = this.dateRangeSubject.asObservable();
 
-	public apiUrl = '/api/v4/competitions';
+	public apiUrl = `${environment.apiUrl}/competitions`;
 	private headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
 
 	constructor(private http: HttpClient) {}
@@ -53,7 +53,7 @@ export class MainService {
 	public getMatches(leagueCode: string, dateFrom: Date, dateTo: Date): Observable<Match[]> {
 		const from = formatDate(dateFrom);
 		const to = formatDate(dateTo);
-		return this.http.get<Match[]>(`/api/v4/matches?competitions=${leagueCode}&dateFrom=${from}&dateTo=${to}`, { headers: this.headers })
+		return this.http.get<Match[]>(`${environment.apiUrl}/matches?competitions=${leagueCode}&dateFrom=${from}&dateTo=${to}`, { headers: this.headers })
 			.pipe(map(response => mapMatches(response)));
 	}
 }
