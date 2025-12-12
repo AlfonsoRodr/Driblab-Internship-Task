@@ -90,7 +90,7 @@ This link can also be found in the About section of this repository, located on 
 ## 🧪 Quality Control
 To ensure the optimal and correct functioning of the application, a series of unit tests were implemented, independently testing each component and service method. Additionally, to comply with best development practices, an 80% test coverage target was aimed for, and a coverage report was generated, which can be found in this [folder](https://github.com/AlfonsoRodr/Driblab-Internship-Task/tree/main/frontend/coverage/frontend).
 
-Furthermore, to ensure the proper operation of the application in an environment outside of the local machine, a workflow was set up so that on every commit, all application tests are executed within the GitHub Actions environment.
+Furthermore, to ensure the proper operation of the application in an environment outside of the local machine, a workflow was set up so that on every commit, all application tests are executed within the GitHub Actions environment. To ensure that these workflows run correctly, two `GitHub Secrets` have been configured, providing the API URL and the API key required by the application.
 
 In order to run these unit tests, execute the following command:
 
