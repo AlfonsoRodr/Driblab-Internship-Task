@@ -64,7 +64,6 @@ describe('Matches Component Unit Tests', () => {
 		fixture = TestBed.createComponent(MatchesComponent);
 		component = fixture.componentInstance;
 
-		// Emitimos valores iniciales antes de detectChanges
 		dateRangeSubject.next(mockDateRange);
 		selectedLeagueSubject.next(mockLeague);
 	});
