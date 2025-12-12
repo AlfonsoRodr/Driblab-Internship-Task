@@ -26,6 +26,7 @@ export class MainService {
         dateTo: new Date(new Date().setDate(new Date().getDate() + 10))
     });
     public dateRange$ = this.dateRangeSubject.asObservable();
+
 	public apiUrl = '/api/v4/competitions';
 	private headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
 
