@@ -4,7 +4,6 @@
 - [Author and Github Repository](#-author-and-github-repository)
 - [Instructions](#-instructions)
 - [Deployment](#-deployment)
-- [Application Structure](#-application-structure)
 - [Quality Control](#-quality-control)
 - [Other Tools](#-other-tools)
 
@@ -68,10 +67,9 @@ ng serve --proxy-config proxy.conf.json
 If everything goes as expected, you will be able to access it at: **http://localhost:4200**
 
 ## 🚀 Deployment
-The application was deployed using `Vercel`, and it's now accessible through this [url](https://deployment-attempt-10-gt9ksitub-alfonsorodrs-projects.vercel.app/)
+The application was deployed using `Vercel`, and it is now accessible at this [URL](https://driblab-internship-task.vercel.app/).
 
-## 🧱 Application Structure
-INSERTAR FOTO DEL DIAGRAMA
+This link is also available in the `About` section of this repository, located on the right-hand side.
 
 ## 🧪 Quality Control
 To ensure the optimal and correct functioning of the application, a series of unit tests were implemented, independently testing each component and service method. Additionally, to comply with best development practices, an 80% test coverage target was aimed for, and a coverage report was generated, which can be found in this [folder](https://github.com/AlfonsoRodr/Driblab-Internship-Task/tree/main/frontend/coverage/frontend).
