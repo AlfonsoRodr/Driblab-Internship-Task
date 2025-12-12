@@ -74,6 +74,22 @@ To ensure the optimal and correct functioning of the application, a series of un
 
 Furthermore, to ensure the proper operation of the application in an environment outside of the local machine, a workflow was set up so that on every commit, all application tests are executed within the GitHub Actions environment.
 
+In order to run these unit tests, execute the following command:
+
+> [!IMPORTANT]
+> Remember that to run these commands you will need to be located in `/frontend`
+
+```bash
+npm run test
+# or
+ng test
+```
+
+And to generate the coverage report:
+```bash
+npm run test:coverage
+```
+
 ## 🔧 Other Tools
 For the development of this project, various complementary tools were used to support the development process. These are as follows:
 - [TailwindCSS](https://tailwindcss.com/)
