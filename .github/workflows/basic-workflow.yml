@@ -15,13 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Node.js 22 Configuration
+      - name: Create environment.ts
+        run: |
+          mkdir -p ./frontend/src/environments
+          echo "export const environment = {" >> ./frontend/src/environments/environment.ts
+          echo "  production: false," >> ./frontend/src/environments/environment.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./frontend/src/environments/environment.ts
+          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./frontend/src/environments/environment.ts
+          echo "};" >> ./frontend/src/environments/environment.ts
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      # Install Angular Dependencies
       - name: Install Dependencies
         run: npm install
         working-directory: ./frontend
@@ -32,6 +39,15 @@ jobs:
     needs: build-frontend
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create environment.ts
+        run: |
+          mkdir -p ./frontend/src/environments
+          echo "export const environment = {" >> ./frontend/src/environments/environment.ts
+          echo "  production: false," >> ./frontend/src/environments/environment.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./frontend/src/environments/environment.ts
+          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./frontend/src/environments/environment.ts
+          echo "};" >> ./frontend/src/environments/environment.ts
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
