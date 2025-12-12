@@ -15,14 +15,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create environment.ts
+      - name: Create Angular Environment Files
+        working-directory: ./frontend
         run: |
-          mkdir -p ./frontend/src/environments
-          echo "export const environment = {" >> ./frontend/src/environments/environment.ts
-          echo "  production: false," >> ./frontend/src/environments/environment.ts
-          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./frontend/src/environments/environment.ts
-          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./frontend/src/environments/environment.ts
-          echo "};" >> ./frontend/src/environments/environment.ts
+          mkdir -p ./src/environments
+
+          # environment.ts (development)
+          echo "export const environment = {" > ./src/environments/environment.ts
+          echo "  production: false," >> ./src/environments/environment.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./src/environments/environment.ts
+          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./src/environments/environment.ts
+          echo "};" >> ./src/environments/environment.ts
+
+          # environment.prod.ts (production)
+          echo "export const environment = {" > ./src/environments/environment.prod.ts
+          echo "  production: true," >> ./src/environments/environment.prod.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./src/environments/environment.prod.ts
+          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./src/environments/environment.prod.ts
+          echo "};" >> ./src/environments/environment.prod.ts
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -40,14 +50,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create environment.ts
+      - name: Create Angular Environment Files
+        working-directory: ./frontend
         run: |
-          mkdir -p ./frontend/src/environments
-          echo "export const environment = {" >> ./frontend/src/environments/environment.ts
-          echo "  production: false," >> ./frontend/src/environments/environment.ts
-          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./frontend/src/environments/environment.ts
-          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./frontend/src/environments/environment.ts
-          echo "};" >> ./frontend/src/environments/environment.ts
+          mkdir -p ./src/environments
+
+          # environment.ts (development)
+          echo "export const environment = {" > ./src/environments/environment.ts
+          echo "  production: false," >> ./src/environments/environment.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./src/environments/environment.ts
+          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./src/environments/environment.ts
+          echo "};" >> ./src/environments/environment.ts
+
+          # environment.prod.ts (production)
+          echo "export const environment = {" > ./src/environments/environment.prod.ts
+          echo "  production: true," >> ./src/environments/environment.prod.ts
+          echo "  apiUrl: '${{ secrets.API_URL }}'," >> ./src/environments/environment.prod.ts
+          echo "  apiKey: '${{ secrets.API_KEY }}'" >> ./src/environments/environment.prod.ts
+          echo "};" >> ./src/environments/environment.prod.ts
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
