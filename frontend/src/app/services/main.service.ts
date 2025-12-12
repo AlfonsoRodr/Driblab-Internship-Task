@@ -27,13 +27,13 @@ export class MainService {
     });
     public dateRange$ = this.dateRangeSubject.asObservable();
 
-	public apiUrl = `${environment.apiUrl}/competitions`;
+	public apiUrl = `${environment.apiUrl}`;
 	private headers = new HttpHeaders({ 'X-Auth-Token': environment.apiKey });
 
 	constructor(private http: HttpClient) {}
 
 	public getAvailableLeagues(): Observable<League[]> {
-		return this.http.get<League[]>(`${this.apiUrl}`, { headers: this.headers })
+		return this.http.get<League[]>(`${this.apiUrl}/competitions`, { headers: this.headers })
 			.pipe(map(response => filterAndMapCompetitions(response)));
 	}
 
@@ -46,7 +46,7 @@ export class MainService {
     }
 
 	public getStandings(leagueCode: string): Observable<Standings[]> {
-		return this.http.get<Standings[]>(`${this.apiUrl}/${leagueCode}/standings`, { headers: this.headers })
+		return this.http.get<Standings[]>(`${this.apiUrl}/competitions/${leagueCode}/standings`, { headers: this.headers })
 			.pipe(map(response => mapStandings(response)));
 	}
 
