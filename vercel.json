@@ -2,7 +2,10 @@
   "rewrites": [
     {
       "source": "/api/v4/(.*)",
-      "destination": "http://api.football-data.org/v4/$1"
+      "destination": "http://api.football-data.org/v4/$1",
+      "headers": {
+        "X-Auth-Token": "6fc6c54ba0ff451c8e929f4811c67948"
+      }
     }
   ],
   "builds": [
