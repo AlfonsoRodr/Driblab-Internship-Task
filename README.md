@@ -12,6 +12,8 @@ Alfonso Rodríguez Gutt
 
 You can find more information about this project in the [repository](https://github.com/AlfonsoRodr/Driblab-Internship-Task).
 
+---
+
 ## 📝 Instructions
 
 In this section, it will be explained all the steps you neeed to and the requirements for the proper execution of this project
@@ -26,6 +28,11 @@ And finally, locate yourself into the correct folder:
 ```bash
 cd Driblab-Internship-Task
 ```
+
+> [!WARNING]
+> For security reasons, the `API_KEY` is not included in the repository (as shown in the [gitignore file](https://github.com/AlfonsoRodr/Driblab-Internship-Task/blob/main/frontend/.gitignore)). This means that, if you want to run the application locally, you will need to manually create the file that is ignored by Git.
+> <br> <br>
+> However, since the application is deployed on `Vercel` (see the [Deployment Section](#-deployment)), there is no need to modify anything in the code when accessing the live version.
 
 ### 📋 Requirements
 <table>
@@ -64,12 +71,21 @@ ng serve --proxy-config proxy.conf.json
 > [!IMPORTANT]
 > It is very important not to run the frontend with `npm start` or `ng serve`, because this will led to `CORS` problems due to the external API, so in order to avoid this, it is important you run the frontend with the proxy configuration.
 
-If everything goes as expected, you will be able to access it at: **http://localhost:4200**
+
+> [!WARNING]
+> As explained earlier, this is not the recommended way to access the application. In fact, the application will not start unless you manually provide the file that is ignored by Git.
+> To access the application properly, please refer to the next section, where the deployment URL is provided.
+
+---
 
 ## 🚀 Deployment
-The application was deployed using `Vercel`, and it is now accessible at this [URL](https://driblab-internship-task.vercel.app/).
+To facilitate access to the application, improve performance, and support a more elegant and professional web development workflow, the project has been deployed online. The deployment was carried out using `Vercel`, a cloud platform designed for fast, reliable, and scalable frontend applications.
 
-This link is also available in the `About` section of this repository, located on the right-hand side.
+The application is now available at the following [URL](https://driblab-internship-task.vercel.app/).
+
+This link can also be found in the About section of this repository, located on the right-hand side.
+
+---
 
 ## 🧪 Quality Control
 To ensure the optimal and correct functioning of the application, a series of unit tests were implemented, independently testing each component and service method. Additionally, to comply with best development practices, an 80% test coverage target was aimed for, and a coverage report was generated, which can be found in this [folder](https://github.com/AlfonsoRodr/Driblab-Internship-Task/tree/main/frontend/coverage/frontend).
@@ -91,6 +107,8 @@ And to generate the coverage report:
 ```bash
 npm run test:coverage
 ```
+
+---
 
 ## 🔧 Other Tools
 For the development of this project, various complementary tools were used to support the development process. These are as follows:
