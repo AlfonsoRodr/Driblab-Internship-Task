@@ -81,7 +81,7 @@ ng serve --proxy-config proxy.conf.json
 ## 🚀 Deployment
 To facilitate access to the application, improve performance, and support a more elegant and professional web development workflow, the project has been deployed online. The deployment was carried out using `Vercel`, a cloud platform designed for fast, reliable, and scalable frontend applications.
 
-The application is now available at the following [URL](https://driblab-internship-task.vercel.app/).
+The application is now available at the following [URL](https://driblab-task.vercel.app/).
 
 This link can also be found in the About section of this repository, located on the right-hand side.
 
